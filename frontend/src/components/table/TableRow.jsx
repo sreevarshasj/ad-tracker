@@ -67,6 +67,23 @@ export default function TableRow({ campaign, onClick }) {
           <span className="text-status-success text-xs font-medium">Ongoing</span>
         )}
       </td>
+
+      {/* Source Link */}
+      <td className="px-4 py-3 text-right" onClick={(e) => e.stopPropagation()}>
+        <a
+          href={
+            campaign.platform === 'META' ? `https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=IN&q=${encodeURIComponent(campaign.institutionName)}&search_type=keyword_unordered&media_type=all` :
+            campaign.platform === 'GOOGLE' ? `https://adstransparency.google.com/?query=${encodeURIComponent(campaign.institutionName)}&region=IN` :
+            campaign.platform === 'LINKEDIN' ? `https://www.linkedin.com/ad-library/search?keyword=${encodeURIComponent(campaign.institutionName)}` :
+            '#'
+          }
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[10px] font-bold text-accent-purple hover:text-accent-cyan transition-colors uppercase tracking-widest border border-accent-purple/30 px-2 py-1 rounded hover:bg-accent-purple/10"
+        >
+          View Ads
+        </a>
+      </td>
     </tr>
   )
 }

@@ -38,7 +38,7 @@ export default function Sidebar() {
         {!collapsed && (
           <div className="fade-in">
             <span className="text-sm font-bold bg-gradient-to-r from-accent-purple to-accent-cyan bg-clip-text text-transparent leading-none">
-              AdsTracker
+              Edutraxa
             </span>
             <p className="text-[10px] text-text-muted mt-0.5">Agent Platform</p>
           </div>

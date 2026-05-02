@@ -17,6 +17,7 @@ const COLUMNS = [
   { key: 'estimatedSpend', label: 'Est. Spend' },
   { key: 'startDate', label: 'Start Date' },
   { key: null, label: 'End Date' },
+  { key: null, label: 'Source' },
 ]
 
 export default function CampaignTable() {
