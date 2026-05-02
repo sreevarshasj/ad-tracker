@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-root: #0A0A0F;
+  --bg-surface: #111118;
+  --bg-elevated: #16161F;
+  --border: #1E1E2E;
+  --accent: #6C5CE7;
+  --cyan: #00D2FF;
+  --text-1: #EDEDED;
+  --text-2: #9B9BB4;
+  --text-3: #4A4A6A;
+  --success: #00B894;
+  --warning: #FDCB6E;
+  --danger: #E17055;
+}
+
+html,
+body,
+#root {
+  background-color: var(--bg-root);
+  color: var(--text-1);
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-3);
+}
+
+@layer components {
+  /* Cards */
+  .card-dark {
+    @apply bg-background-surface border border-border rounded-xl;
+  }
+  .card-elevated {
+    @apply bg-background-elevated border border-border rounded-xl;
+  }
+
+  /* Badges */
+  .badge-active {
+    @apply bg-green-900/30 text-status-success border border-green-800/50 text-xs px-2 py-0.5 rounded-full font-medium;
+  }
+  .badge-ended {
+    @apply bg-gray-800/50 text-text-secondary border border-gray-700/50 text-xs px-2 py-0.5 rounded-full font-medium;
+  }
+  .badge-paused {
+    @apply bg-yellow-900/30 text-status-warning border border-yellow-800/50 text-xs px-2 py-0.5 rounded-full font-medium;
+  }
+  .badge-high-invest {
+    @apply bg-purple-900/30 text-accent-purple border border-purple-800/50 text-xs px-2 py-0.5 rounded-full font-medium;
+  }
+  .badge-long-running {
+    @apply bg-orange-900/30 text-orange-400 border border-orange-800/50 text-xs px-2 py-0.5 rounded-full font-medium;
+  }
+  .badge-high-engagement {
+    @apply bg-cyan-900/30 text-accent-cyan border border-cyan-800/50 text-xs px-2 py-0.5 rounded-full font-medium;
+  }
+  .badge-school {
+    @apply bg-blue-900/30 text-blue-400 border border-blue-800/50 text-xs px-2 py-0.5 rounded-full font-medium;
+  }
+  .badge-college {
+    @apply bg-purple-900/30 text-purple-400 border border-purple-800/50 text-xs px-2 py-0.5 rounded-full font-medium;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply bg-accent-purple hover:bg-[#5A4BD6] text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm;
+  }
+  .btn-ghost {
+    @apply bg-transparent hover:bg-border text-text-secondary hover:text-text-primary px-4 py-2 rounded-lg transition-all duration-200 text-sm;
+  }
+  .btn-danger {
+    @apply bg-status-danger/20 hover:bg-status-danger/30 text-status-danger border border-status-danger/30 px-4 py-2 rounded-lg transition-all duration-200 text-sm;
+  }
+
+  /* Inputs */
+  .input-dark {
+    @apply bg-background-surface border border-border text-text-primary rounded-lg px-3 py-2 focus:outline-none focus:border-accent-purple transition-colors text-sm placeholder-text-muted;
+  }
+
+  /* Stat card metric */
+  .metric-value {
+    @apply text-2xl font-bold text-text-primary;
+  }
+  .metric-label {
+    @apply text-xs text-text-secondary font-medium uppercase tracking-wider;
+  }
+}

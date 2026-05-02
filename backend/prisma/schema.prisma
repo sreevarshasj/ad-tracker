@@ -1,0 +1,88 @@
+// FILE: backend/prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Campaign {
+  id              String       @id @default(uuid())
+  platform        String       // "META", "GOOGLE", "LINKEDIN", "ENEWSPAPER"
+  institutionName String
+  category        String       @default("UNKNOWN") // "SCHOOL", "COLLEGE", "UNKNOWN"
+  country         String       @default("India")
+  state           String       @default("")
+  city            String       @default("")
+  startDate       DateTime
+  endDate         DateTime?
+  status          String       @default("ACTIVE") // "ACTIVE", "ENDED", "PAUSED"
+  tags            String       @default("") // Comma-separated tags
+  externalId      String       @unique
+  estimatedSpend  Float        @default(0)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  performances    Performance[]
+  creatives       Creative[]
+
+  @@index([platform])
+  @@index([category])
+  @@index([status])
+  @@index([country, state, city])
+  @@index([institutionName])
+}
+
+model Performance {
+  id          String   @id @default(uuid())
+  campaignId  String
+  campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  impressions Int      @default(0)
+  clicks      Int      @default(0)
+  spend       Float    @default(0)
+  ctr         Float    @default(0)
+  date        DateTime
+  createdAt   DateTime @default(now())
+
+  @@unique([campaignId, date])
+  @@index([campaignId])
+  @@index([date])
+}
+
+model Creative {
+  id         String         @id @default(uuid())
+  campaignId String
+  campaign   Campaign       @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  mediaUrl   String         @default("")
+  adCopy     String         @default("")
+  cta        String         @default("")
+  format     String         @default("IMAGE") // "IMAGE", "VIDEO", "CAROUSEL"
+  platform   String
+  createdAt  DateTime       @default(now())
+
+  @@index([campaignId])
+  @@index([platform])
+}
+
+model SyncLog {
+  id       String   @id @default(uuid())
+  platform String
+  status   String
+  message  String?
+  syncedAt DateTime @default(now())
+  count    Int      @default(0)
+
+  @@index([platform])
+  @@index([syncedAt])
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("viewer")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
